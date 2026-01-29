@@ -1,10 +1,15 @@
 <script lang="ts">
+  /**
+   * @fileoverview Ria Face movement controller.
+   */
   import { onMount } from 'svelte';
   import { Canvas } from '@threlte/core';
+  // Imports shadcn Component
   import * as Card from '$lib/components/ui/card';
   import { Label } from '$lib/components/ui/label';
   import { Slider } from '$lib/components/ui/slider';
   import Scene from '$lib/components/Scene.svelte';
+  // Imports TRPC and state management
   import { trpc } from '$lib/trpc';
   import { state, derived } from '$lib/state';
 
@@ -13,6 +18,7 @@
     items: string[];
   }
 
+  // Defines All Morph Target Categories and their items
   const MOVEMENT_CATEGORIES: Category[] = [
     { label: 'EYES', items: ['eye-blink.UP.L', 'eye-blink.UP.R', 'eye-blink.LO.L', 'eye-blink.LO.R', 'eye-flare.UP.L', 'eye-flare.UP.R', 'eye-flare.LO.L', 'eye-flare.LO.R'] },
     { label: 'WINCE', items: ['wince.L', 'wince.R'] },
@@ -20,13 +26,19 @@
     { label: 'LIPS', items: ['lip-UP.C.UP', 'lip-UP.C.DN', 'lips-smile.L', 'lips-smile.R', 'lip-JAW.DN'] },
   ];
 
+  // State initialization
   const playbackSpeed = state(0);
   const faceSettings = state<Record<string, number>>(
     Object.fromEntries([...MOVEMENT_CATEGORIES.flatMap(c => c.items), 'brow_center_UP'].map(id => [id, 0]))
   );
 
+  /** Derived state*/
   const processedSettings = derived(faceSettings, $fs => ({ ...$fs }));
 
+  /**
+   * @param name The unique identifier for the movement.
+   * @param value The array of numbers returned by the Shadcn Slider.
+   */
   async function syncMovement(name: string, value: number[]) {
     const val = value[0]; // Shadcn slider returns an array
     if (name === 'playbackSpeed') {
@@ -68,7 +80,7 @@
         <Slider value={[$playbackSpeed]} max={1} step={0.01} onValueChange={v => syncMovement('playbackSpeed', v)} />
       </section>
 
-      <!-- Main Sliders -->
+      <!-- Morph Targets Slider View -->
       <section class="space-y-4">
         <div class="flex justify-between items-center">
           <Label class="text-[10px] font-bold uppercase tracking-tighter text-cyan-400">Brows UP</Label>
