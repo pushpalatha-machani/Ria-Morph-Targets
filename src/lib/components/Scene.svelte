@@ -17,6 +17,10 @@
   /** The playback speed for animation */
   export let playbackSpeed: number = 0;
 
+
+  /** The mesh color */
+  export let meshColor: string = '';
+
   /** load the GLTF file */
   const gltf = useGltf('/ria.glb');
 
@@ -32,6 +36,13 @@
    */
   $: if ($gltf) {
     const robotRoot = $gltf.scene;
+
+    // Mesh Colour
+    robotRoot.traverse((obj) => {
+      if (obj instanceof THREE.Mesh) {
+        obj.material.color.set(meshColor);
+      }
+    });
 
     // Calculate the box for centering and scaling.
     const boundingBox = new THREE.Box3().setFromObject(robotRoot);

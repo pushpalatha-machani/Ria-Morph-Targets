@@ -1,11 +1,11 @@
 {
   "playbackSpeed": 0,
-  "brow_center_UP": 0.86,
-  "eye-blink.UP.L": 0.51,
-  "eye-blink.UP.R": 0.84,
+  "brow_center_UP": 0,
+  "eye-blink.UP.L": 0,
+  "eye-blink.UP.R": 0,
   "eye-blink.LO.L": 0.77,
   "eye-blink.LO.R": 0.71,
-  "wince.L": 0.99,
+  "wince.L": 0.3,
   "lip-JAW.DN": 0.86,
   "lips-smile.R": 0.95,
   "lips-smile.L": 0.87,
@@ -14,9 +14,8 @@
   "sneer.R": 0.73,
   "sneer.L": 1,
   "wince.R": 0.6,
-  "eye-flare.LO.R": 0.67,
-  "eye-flare.LO.L": 0.86,
-  "eye-flare.UP.R": 0.73,
+  "eye-flare.LO.R": 0.2,
+  "eye-flare.LO.L": 0.89,
+  "eye-flare.UP.R": 0.2,
   "eye-flare.UP.L": 1
 }
-
